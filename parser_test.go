@@ -122,6 +122,7 @@ func TestParseTapeFile(t *testing.T) {
 		{Type: SET, Options: "LoopOffset", Args: "60.4%"},
 		{Type: SET, Options: "LoopOffset", Args: "20.99%"},
 		{Type: SET, Options: "CursorBlink", Args: "false"},
+		{Type: SET, Options: "Prompt", Args: "$ "},
 		{Type: SLEEP, Options: "", Args: "1s"},
 		{Type: SLEEP, Options: "", Args: "500ms"},
 		{Type: SLEEP, Options: "", Args: ".5s"},
