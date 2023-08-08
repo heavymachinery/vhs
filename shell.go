@@ -20,11 +20,11 @@ type Shell struct {
 // Shells contains a mapping from shell names to their Shell struct.
 var Shells = map[string]Shell{
 	bash: {
-		Env:     []string{"PS1=\\[\\e[38;2;90;86;224m\\]> \\[\\e[0m\\]", "BASH_SILENCE_DEPRECATION_WARNING=1"},
+		Env:     []string{"PS1=\\[\\e[38;2;90;86;224m\\]{prompt}\\[\\e[0m\\]", "BASH_SILENCE_DEPRECATION_WARNING=1"},
 		Command: []string{"bash", "--noprofile", "--norc", "--login", "+o", "history"},
 	},
 	zsh: {
-		Env:     []string{`PROMPT=%F{#5B56E0}> %F{reset_color}`},
+		Env:     []string{`PROMPT=%F{#5B56E0}{prompt}%F{reset_color}`},
 		Command: []string{"zsh", "--histnostore", "--no-rcs"},
 	},
 	fish: {
@@ -34,7 +34,7 @@ var Shells = map[string]Shell{
 			"--no-config",
 			"--private",
 			"-C", "function fish_greeting; end",
-			"-C", `function fish_prompt; set_color 5B56E0; echo -n "> "; set_color normal; end`,
+			"-C", `function fish_prompt; set_color 5B56E0; echo -n "{prompt}"; set_color normal; end`,
 		},
 	},
 	powershell: {
@@ -44,7 +44,7 @@ var Shells = map[string]Shell{
 			"-NoExit",
 			"-NoProfile",
 			"-Command",
-			`Set-PSReadLineOption -HistorySaveStyle SaveNothing; function prompt { Write-Host '>' -NoNewLine -ForegroundColor Blue; return ' ' }`,
+			`Set-PSReadLineOption -HistorySaveStyle SaveNothing; function prompt { Write-Host '{prompt}' -NoNewLine -ForegroundColor Blue; return ' ' }`,
 		},
 	},
 	pwsh: {
@@ -55,11 +55,11 @@ var Shells = map[string]Shell{
 			"-NoExit",
 			"-NoProfile",
 			"-Command",
-			`Set-PSReadLineOption -HistorySaveStyle SaveNothing; Function prompt { Write-Host -ForegroundColor Blue -NoNewLine '>'; return ' ' }`,
+			`Set-PSReadLineOption -HistorySaveStyle SaveNothing; Function prompt { Write-Host -ForegroundColor Blue -NoNewLine '{prompt}'; return ' ' }`,
 		},
 	},
 	cmdexe: {
-		Command: []string{"cmd.exe", "/k", "prompt=^> "},
+		Command: []string{"cmd.exe", "/k", "prompt=^{prompt}"},
 	},
 	nushell: {
 		Command: []string{"nu", "--interactive", "--execute", "let-env PROMPT_COMMAND = { '' }"},

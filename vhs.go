@@ -118,7 +118,8 @@ func (vhs *VHS) Start() error {
 	}
 
 	port := randomPort()
-	vhs.tty = buildTtyCmd(port, vhs.Options.Shell)
+
+	vhs.tty = buildTtyCmd(port, vhs.Options.Shell, vhs.Options.Prompt)
 	if err := vhs.tty.Start(); err != nil {
 		return fmt.Errorf("could not start tty: %w", err)
 	}

@@ -14,6 +14,7 @@ import (
 	"net"
 	"os"
 	"os/exec"
+	"strings"
 )
 
 // randomPort returns a random port number that is not in use.
@@ -24,7 +25,7 @@ func randomPort() int {
 }
 
 // buildTtyCmd builds the ttyd exec.Command on the given port.
-func buildTtyCmd(port int, shell Shell) *exec.Cmd {
+func buildTtyCmd(port int, shell Shell, prompt string) *exec.Cmd {
 	args := []string{
 		fmt.Sprintf("--port=%d", port),
 		"--interface", "127.0.0.1",
@@ -34,6 +35,14 @@ func buildTtyCmd(port int, shell Shell) *exec.Cmd {
 		"-t", "customGlyphs=true",
 		"--once", // will allow one connection and exit
 		"--writable",
+	}
+
+	// Apply the prompt
+	for i, env := range shell.Env {
+		shell.Env[i] = strings.Replace(env, "{prompt}", prompt, 1)
+	}
+	for i, cmd := range shell.Command {
+		shell.Command[i] = strings.Replace(cmd, "{prompt}", prompt, 1)
 	}
 
 	args = append(args, shell.Command...)
