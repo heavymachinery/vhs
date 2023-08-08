@@ -496,6 +496,22 @@ Set CursorBlink false
   <img width="600" alt="Example of setting the cursor blink." src="https://vhs.charm.sh/vhs-3rMCb80VEkaDdTOJMCrxKy.gif">
 </picture>
 
+#### Set Prompt
+
+Set the shell prompt using the `Set Prompt "<prompt>"` command. The prompt will undergo any variable expansion supported by the selected shell. Defaults to `> ` if not set.
+
+```elixir
+# Make sure to set the appropriate shell as well
+Set Shell zsh
+Set Prompt "%1~ %# "
+```
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://vhs.charm.sh/vhs-5wjz8uKKcpEhXOVrnc2cqu.gif">
+  <source media="(prefers-color-scheme: light)" srcset="https://vhs.charm.sh/vhs-5wjz8uKKcpEhXOVrnc2cqu.gif">
+  <img width="600" alt="Example of setting the prompt." src="https://vhs.charm.sh/vhs-5wjz8uKKcpEhXOVrnc2cqu.gif">
+</picture>
+
 ### Type
 
 Use `Type` to emulate key presses. That is, you can use `Type` to script typing
