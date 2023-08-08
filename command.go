@@ -278,6 +278,7 @@ var Settings = map[string]CommandFunc{
 	"WindowBarSize": ExecuteSetWindowBarSize,
 	"BorderRadius":  ExecuteSetBorderRadius,
 	"CursorBlink":   ExecuteSetCursorBlink,
+	"Prompt":        ExecuteSetPrompt,
 }
 
 // ExecuteSet applies the settings on the running vhs specified by the
@@ -355,6 +356,11 @@ func ExecuteSetTheme(c Command, v *VHS) {
 	_, _ = v.Page.Eval(fmt.Sprintf("() => term.options.theme = %s", string(bts)))
 	v.Options.Video.BackgroundColor = v.Options.Theme.Background
 	v.Options.Video.WindowBarColor = v.Options.Theme.Background
+}
+
+// ExecuteSetPrompt applies the prompt on the vhs.
+func ExecuteSetPrompt(c Command, v *VHS) {
+	v.Options.Prompt = c.Args
 }
 
 // ExecuteSetTypingSpeed applies the default typing speed on the vhs.

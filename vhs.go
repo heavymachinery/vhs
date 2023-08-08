@@ -47,6 +47,7 @@ type Options struct {
 	Video         VideoOptions
 	LoopOffset    float64
 	CursorBlink   bool
+	Prompt        string
 }
 
 const (
@@ -56,6 +57,7 @@ const (
 	defaultLetterSpacing = 1.0
 	fontsSeparator       = ","
 	defaultCursorBlink   = true
+	defaultPrompt        = "> "
 )
 
 var defaultFontFamily = withSymbolsFallback(strings.Join([]string{
@@ -91,6 +93,7 @@ func DefaultVHSOptions() Options {
 		Theme:         DefaultTheme,
 		Video:         DefaultVideoOptions(),
 		CursorBlink:   defaultCursorBlink,
+		Prompt:        defaultPrompt,
 	}
 }
 
